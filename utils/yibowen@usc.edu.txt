@@ -1,0 +1,151 @@
+{
+  "profile": {
+    "headline": "JD.COM"
+  },
+  "about": {},
+  "positions": [
+    {
+      "title": "Software Engineer Intern",
+      "link": "https://www.linkedin.com/company/jd.com/",
+      "url": "https://www.linkedin.com/company/jd.com/",
+      "companyName": "JD.COM",
+      "location": "Beijing, China",
+      "date1": "2021年5月 - 至今",
+      "date2": "4 个月"
+    }
+  ],
+  "educations": [
+    {
+      "title": "University of Southern California",
+      "degree": "Bachelor's degree",
+      "url": "https://www.linkedin.com/school/17971/?legacySchoolId=17971",
+      "fieldOfStudy": "Computer game",
+      "date1": "2020年",
+      "date2": "2024年"
+    },
+    {
+      "title": "Shanghai High School",
+      "degree": "High School Diploma",
+      "url": "https://www.linkedin.com/school/4111068/?legacySchoolId=4111068",
+      "fieldOfStudy": "*",
+      "date1": "2017年",
+      "date2": "2020年",
+      "description": "Outstanding Graduates of Class 2020"
+    }
+  ],
+  "skills": [
+    {
+      "title": "C++"
+    },
+    {
+      "title": "Java"
+    },
+    {
+      "title": "SQL"
+    },
+    {
+      "title": "Git"
+    },
+    {
+      "title": "Spring Framework"
+    },
+    {
+      "title": "Maven"
+    },
+    {
+      "title": "Cinema 4D"
+    },
+    {
+      "title": "Adobe Illustrator"
+    },
+    {
+      "title": "MyBatis"
+    },
+    {
+      "title": "Redis"
+    }
+  ],
+  "recommendations": {
+    "given": [
+      {}
+    ],
+    "received": []
+  },
+  "accomplishments": [
+    {
+      "count": "0",
+      "title": "所学课程"
+    },
+    {
+      "count": "0",
+      "title": "荣誉奖项"
+    },
+    {
+      "count": "0",
+      "title": "语言能力"
+    },
+    {
+      "count": "0",
+      "title": "参与组织"
+    },
+    {
+      "count": "0",
+      "title": "专利发明"
+    },
+    {
+      "count": "0",
+      "title": "所做项目"
+    },
+    {
+      "count": "0",
+      "title": "出版作品"
+    },
+    {
+      "count": "0",
+      "title": "测试成绩"
+    }
+  ],
+  "courses": [
+    {}
+  ],
+  "languages": [
+    {}
+  ],
+  "projects": [
+    {}
+  ],
+  "peopleAlsoViewed": [
+    {
+      "user": "https://www.linkedin.com/in/yan-lan-2baa51166/",
+      "text": "--",
+      "profileImage": "https://media.licdn.cn/dms/image/C5103AQGZ_6KQgYSlRg/profile-displayphoto-shrink_100_100/0/1529252637138?e=1633564800&v=beta&t=hn9Upts7byPjkmFysuv5UWFL4PNp1RAmjxRip_x2giA",
+      "name": "YAN LAN"
+    },
+    {
+      "user": "https://www.linkedin.com/in/nianchen-liu-956874201/",
+      "text": "Student",
+      "profileImage": "https://media.licdn.cn/dms/image/C4D03AQGQ5yYcBvkEYQ/profile-displayphoto-shrink_100_100/0/1623986299212?e=1633564800&v=beta&t=iaR6f6odRGxXa6MjBsAIJzeLINzqUZwp-VddcZfS30M",
+      "name": "Nianchen Liu"
+    },
+    {
+      "user": "https://www.linkedin.com/in/zhen-zhu-22553524/",
+      "text": "Scientist at Pandora",
+      "profileImage": "https://media.licdn.cn/dms/image/C4D03AQEbxVcObzDEgQ/profile-displayphoto-shrink_100_100/0/1517078435168?e=1633564800&v=beta&t=aXDKqncgKuTeFbmktZgfYcdedDlAV4bb8Rlj-DH6b-4",
+      "name": "Zhen Zhu"
+    },
+    {
+      "user": "https://www.linkedin.com/in/joyce-chenjie-yuan-298672179/",
+      "text": "Data Analyst Intern at 360 DigiTech",
+      "profileImage": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+      "name": "Joyce Chenjie Yuan"
+    },
+    {
+      "user": "https://www.linkedin.com/in/yuyue-tu-478246172/",
+      "text": "Incoming MEng DS student at University of Michigan",
+      "profileImage": "https://media.licdn.cn/dms/image/C5103AQFaKpwQLhpOsA/profile-displayphoto-shrink_100_100/0/1559634493518?e=1633564800&v=beta&t=BrH8yWB2tGz5-HCot0P3JTtxON8gnB9K_NvHLRWeg_M",
+      "name": "Yuyue Tu"
+    }
+  ],
+  "volunteerExperience": [],
+  "contact": []
+}
