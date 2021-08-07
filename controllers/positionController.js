@@ -12,11 +12,13 @@ const factory = require('./handlerFactory');
 
 // TODO  make it omit sending "description"
 exports.getAllPositions = catchAsync(async (req, res, next) => {
-    
     if (!req.baseUrl.includes('/positions')) return next();
     // if it is a student, only allow access to materials of his grade
     if (req.identity === 'student'){
-        const gradeValue = (await Student.findOne({ user: req.user.id })).grade;
+        let gradeValue = (await Student.findOne({ user: req.user.id })).grade;
+        // console.log("The student has grade: "+ gradeValue);
+        gradeValue = gradeEnums.indexOf(gradeValue);
+        // console.log("The student has grade: "+ gradeValue);
         const features = new APIFeatures(
             Position.find({ target: gradeValue }),
             req.query
@@ -35,10 +37,21 @@ exports.getAllPositions = catchAsync(async (req, res, next) => {
                 Positions: doc,
             },
         });
-    // if it is a faculty, only queries the positions he/she posted
+        // if it is a faculty, only queries the positions he/she posted
     } else if (req.identity === 'faculty') {
         const faculty = (await Faculty.findOne({ user: req.user.id })).id;
-        const doc = await Position.find({ faculty });
+
+        const features = new APIFeatures(
+            Position.find({ faculty }),
+            req.query
+        )
+            .filter()
+            .sort()
+            .limitFields()
+            .paginate();
+        const doc = await features.query;
+
+        // const doc = await Position.find({ faculty });
 
         res.status(200).json({
             status: 'success',
@@ -48,7 +61,7 @@ exports.getAllPositions = catchAsync(async (req, res, next) => {
                 Positions: doc,
             },
         });
-    } else{
+    } else {
         return next(new AppError('Cannot get "req.identity"... ', 404));
     }
 });
@@ -70,7 +83,6 @@ exports.getAllPositions = catchAsync(async (req, res, next) => {
 //     });
 // });
 
-
 // very good helper function, still necessary
 exports.setData = catchAsync(async (req, res, next) => {
     //delete duplicate values
@@ -79,19 +91,25 @@ exports.setData = catchAsync(async (req, res, next) => {
     next();
 });
 
-
 // Distinguishes between student and faculty
 // visibilities rules apply similarly as above
 exports.getPosition = catchAsync(async (req, res, next) => {
-    if(req.identity === 'student'){
+    if (req.identity === 'student') {
         // where does req.user.id come from?
         const gradeValue = (await Student.findOne({ user: req.user.id })).grade;
         if (!req.baseUrl.includes('/positions')) return next();
         const doc = await Position.findById(req.params.id); // why request params? not body?
 
+        if (!doc) {
+            return next(new AppError('Invalid Doc Id', 404));
+        }
+
         if (doc.target !== gradeValue) {
             return next(
-                new AppError('Can not access to position for another grade', 404)
+                new AppError(
+                    'Can not access to position for another grade',
+                    404
+                )
             );
         }
         res.status(200).json({
@@ -101,7 +119,7 @@ exports.getPosition = catchAsync(async (req, res, next) => {
                 Position: doc,
             },
         });
-    } else if(req.identity === 'faculty'){
+    } else if (req.identity === 'faculty') {
         let query = Position.findById(req.params.id);
         query = query.populate('applications');
         const doc = await query;
@@ -124,8 +142,7 @@ exports.getPosition = catchAsync(async (req, res, next) => {
                 position: doc,
             },
         });
-    }
-    else{
+    } else {
         return next(new AppError('Cannot get "req.identity"... ', 404));
     }
 });
@@ -163,7 +180,7 @@ exports.createPosition = catchAsync(async (req, res, next) => {
     const doc = await Position.create(req.body);
     // const faculty = await Faculty.findById(req.user.id);
     const faculty = await Faculty.findOne({ user: req.user.id });
-    console.log("finding faculty by id: " , req.user.id);
+    console.log('finding faculty by id: ', req.user.id);
 
     faculty.positions.push(doc.id);
     faculty.save();
@@ -175,6 +192,12 @@ exports.createPosition = catchAsync(async (req, res, next) => {
     });
 });
 
+// // TODO
+// exports.close = catchAsync(async (res, req, next) => {
+
+// })
+
 exports.deletePosition = factory.deleteOne(Position);
 
+// TODO might have to customize
 exports.updatePosition = factory.updateOne(Position);
