@@ -6,6 +6,7 @@ const APIFeatures = require('../utils/apiFeatures');
 const gradeEnums = require('../enums/gradeEnums');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
+const Application = require('../models/applicationModel');
 
 // distinguishes between faculty and student
 // and acts different accordingly
@@ -110,11 +111,24 @@ exports.getPosition = catchAsync(async (req, res, next) => {
                 )
             );
         }
+        
+        // check if the student has already applied for this position
+        const studentID = (await Student.findOne({ user: req.user.id })).id;
+        console.log("student ID:"+studentID);
+        console.log("position ID:"+req.params.id);
+        const studentApp = await Application.findOne({position: req.params.id, student: studentID});
+        let applied = false;
+        if(!studentApp){
+            applied = false;
+        } else{
+            applied = true;
+        }
         res.status(200).json({
             status: 'success',
             requestedAt: req.requestTime,
             data: {
                 Position: doc,
+                Applied: applied,
             },
         });
     } else if (req.identity === 'faculty') {

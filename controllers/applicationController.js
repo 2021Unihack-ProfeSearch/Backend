@@ -34,7 +34,7 @@ exports.setData = catchAsync(async (req, res, next) => {
     }
     req.body.position = req.params.id;
     req.body.student = (await Student.findOne({ user: req.user.id })).id;
-    req.body.status = 1;
+    req.body.status = 2;
     next();
 });
 
