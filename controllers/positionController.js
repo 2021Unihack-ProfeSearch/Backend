@@ -14,7 +14,7 @@ const factory = require('./handlerFactory');
 exports.getAllPositions = catchAsync(async (req, res, next) => {
     if (!req.baseUrl.includes('/positions')) return next();
     // if it is a student, only allow access to materials of his grade
-    if (req.identity === 'student'){
+    if (req.identity === 'student') {
         let gradeValue = (await Student.findOne({ user: req.user.id })).grade;
         // console.log("The student has grade: "+ gradeValue);
         gradeValue = gradeEnums.indexOf(gradeValue);
@@ -41,10 +41,7 @@ exports.getAllPositions = catchAsync(async (req, res, next) => {
     } else if (req.identity === 'faculty') {
         const faculty = (await Faculty.findOne({ user: req.user.id })).id;
 
-        const features = new APIFeatures(
-            Position.find({ faculty }),
-            req.query
-        )
+        const features = new APIFeatures(Position.find({ faculty }), req.query)
             .filter()
             .sort()
             .limitFields()
@@ -103,8 +100,9 @@ exports.getPosition = catchAsync(async (req, res, next) => {
         if (!doc) {
             return next(new AppError('Invalid Doc Id', 404));
         }
-
-        if (doc.target !== gradeValue) {
+        // console.log("gradeValue: "+ gradeValue);
+        // console.log(doc.target);
+        if (!doc.target.includes(gradeValue)) {
             return next(
                 new AppError(
                     'Can not access to position for another grade',
@@ -120,11 +118,9 @@ exports.getPosition = catchAsync(async (req, res, next) => {
             },
         });
     } else if (req.identity === 'faculty') {
-        let query = Position.findById(req.params.id);
-        query = query.populate({
+        const query = Position.findById(req.params.id).populate({
             path: 'applications',
-            select: '-__v -position',
-            populate: {path: 'student', select: '-__v -applications -user'}
+            populate: { path: 'student', select: '-__v -applications' },
         });
         const doc = await query;
 
