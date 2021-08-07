@@ -1,6 +1,6 @@
 {
   "name": "profesearch-backend",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "Unihack Project ProfeSearch Backend",
   "main": "app.js",
   "scripts": {
